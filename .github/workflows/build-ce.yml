@@ -35,6 +35,7 @@ jobs:
         cp bz2.dll output/lib/
         cp bz2_static.lib output/lib/libbz2.a
         cp ../bzlib.h bz_version.h output/include/
+        cp ../COPYING output/
 
     - name: Upload zip file
       uses: actions/upload-artifact@v4
