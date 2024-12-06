@@ -39,5 +39,5 @@ jobs:
     - name: Upload zip file
       uses: actions/upload-artifact@v4
       with:
-        name: bzip2.zip
+        name: bzip2
         path: build/output
