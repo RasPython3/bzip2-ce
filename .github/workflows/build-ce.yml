@@ -1,0 +1,43 @@
+name: Build for WinCE
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install CeGCC
+      run: |
+        wget https://github.com/brain-hackers/cegcc-build/releases/download/2022-10-26-225811/cegcc-x86_64-2022-10-26-225811.zip -O cegcc.zip
+        unzip cegcc.zip -d /opt
+        echo "/opt/cegcc/bin" >> $GITHUB_PATH
+
+    - name: Prepare and configure
+      run: |
+        mkdir build
+        cmake -B ./build -DENABLE_LIB_ONLY=ON -DENABLE_STATIC_LIB=ON -DCMAKE_TOOLCHAIN_FILE=arm-mingw32ce-gcc.cmake
+
+    - name: Build
+      run: |
+        cmake --build ./build --config Release
+
+    - name: Pack products
+      working-directory: ${{github.workspace}}/build
+      run: |
+        mkdir -p output/lib output/include
+        cp bz2.dll output/lib/
+        cp bz2_static.lib output/lib/libbz2.a
+        cp ../bzlib.h bz_version.h output/include/
+
+    - name: Upload zip file
+      uses: actions/upload-artifact@v4
+      with:
+        name: bzip2.zip
+        path: build/output
