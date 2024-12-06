@@ -39,4 +39,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 Julian Seward, jseward@acm.org
 bzip2/libbzip2 version 1.1.0 of 6 September 2010
 
+RasPython3 (https://github.com/RasPython3)
+Added Windows CE (ARM) support on 6 December 2024
+
 --------------------------------------------------------------------------

@@ -243,8 +243,12 @@ if(ENABLE_SHARED_LIB)
                   ${CMAKE_CURRENT_SOURCE_DIR}/libbz2.def
         PUBLIC    ${CMAKE_CURRENT_SOURCE_DIR}/bzlib_private.h
         INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/bzlib.h)
-    # Always use '-fPIC'/'-fPIE' option for shared libraries.
-    set_property(TARGET bz2 PROPERTY POSITION_INDEPENDENT_CODE ON)
+    if(NOT CMAKE_SYSTEM_NAME MATCHES WindowsCE)
+        # Always use '-fPIC'/'-fPIE' option for shared libraries.
+        set_property(TARGET bz2 PROPERTY POSITION_INDEPENDENT_CODE ON)
+    else()
+        set_property(TARGET bz2 PROPERTY POSITION_INDEPENDENT_CODE)
+    endif()
     set_target_properties(bz2 PROPERTIES
         COMPILE_FLAGS "${WARNCFLAGS}"
         VERSION ${LT_VERSION} SOVERSION ${LT_SOVERSION})

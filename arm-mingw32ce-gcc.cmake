@@ -1,0 +1,8 @@
+set(CMAKE_SYSTEM_NAME WindowsCE)
+set(CMAKE_SYSTEM_PROCESSOR arm926ej-s)
+set(CMAKE_C_COMPILER arm-mingw32ce-gcc)
+set(CMAKE_CXX_COMPILER arm-mingw32ce-g++)
+set(CMAKE_RC_COMPILER arm-mingw32ce-windres)
+set(CMAKE_C_FLAGS_INIT "-fno-pic -mcpu=arm926ej-s -march=armv5tej")
+set(CMAKE_SIZEOF_VOID_P 4)
+set(MINGW 1)
